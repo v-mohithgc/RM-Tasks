@@ -15,5 +15,5 @@ jobs:
       uses: actions/add-to-project@v0.4.1
       with:
         project-url: https://github.com/users/v-mohithgc/projects/3
-        github-token: ${{ RM_AUTO_TEST }}
+        github-token: ${{ secrets.RM_AUTO_TEST }}
         labeled: 'Area: RM'
