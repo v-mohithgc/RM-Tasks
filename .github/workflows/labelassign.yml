@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Parse Task Name from Issue Title
       id: extract_task_name
-      run: echo "::set-output name=task_name::${GITHUB_EVENT.issue.title}"
+      run: echo "::set-output name=task_name::${{ github.event.issue.title }}"
 
     - name: Create New Label
       id: create_label
