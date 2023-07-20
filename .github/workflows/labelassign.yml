@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Parse Task Name from Issue Title
       id: extract_task_name
-      run: echo "TASK_NAME=$(jq -r '.issue.title' $GITHUB_EVENT_PATH); echo ::set-env name=TASK_NAME::$TASK_NAME"
+      run: echo "TASK_NAME=$(jq -r '.issue.title' $GITHUB_EVENT_PATH); echo ::set-output name=task_name::$TASK_NAME"
 
     - name: Create New Label
       id: create_label
@@ -21,23 +21,16 @@ jobs:
       with:
         github-token: ${{ secrets.RM_AUTO_TEST }}
         script: |
-          const taskName = process.env.TASK_NAME;
+          const taskName = '${{ steps.extract_task_name.outputs.task_name }}';
           const labelName = taskName.trim().replace(/\s+/g, '-').toLowerCase(); // Convert task name to a label-friendly format
-          const octokit = context.octokit;
-          const owner = context.payload.repository.owner.login;
-          const repo = context.payload.repository.name;
+          const octokit = getOctokit(process.env.GITHUB_TOKEN);
+          const { owner, repo } = context.repo;
 
           // Check if the label already exists
-          const existingLabels = await octokit.issues.listLabelsForRepo({ owner, repo });
+          const existingLabels = await octokit.rest.issues.listLabelsForRepo({ owner, repo });
           const labelExists = existingLabels.data.some(label => label.name === labelName);
 
           if (!labelExists) {
             // Create a new label
-            await octokit.issues.createLabel({ owner, repo, name: labelName, color: 'd73a4a' }); // Set the desired label color here (d73a4a is the default GitHub red)
-          }
-
-
-          if (!labelExists) {
-            // Create a new label
-            await octokit.issues.createLabel({ owner, repo, name: labelName, color: 'd73a4a' }); // Set the desired label color here (d73a4a is the default GitHub red)
+            await octokit.rest.issues.createLabel({ owner, repo, name: labelName, color: 'd73a4a' }); // Set the desired label color here (d73a4a is the default GitHub red)
           }
