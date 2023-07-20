@@ -1,0 +1,37 @@
+name: Create Label from Task Name
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  create_label:
+    runs-on: ubuntu-latest
+    name: Create Label for New Task
+
+    steps:
+    - name: Parse Task Name from Issue Title
+      id: extract_task_name
+      run: echo "::set-output name=task_name::${GITHUB_EVENT.issue.title}"
+
+    - name: Create New Label
+      id: create_label
+      uses: actions/github-script@v5
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const taskName = '${{ steps.extract_task_name.outputs.task_name }}';
+          const labelName = taskName.trim().replace(/\s+/g, '-').toLowerCase(); // Convert task name to a label-friendly format
+          const octokit = context.octokit;
+          const owner = context.payload.repository.owner.login;
+          const repo = context.payload.repository.name;
+
+          // Check if the label already exists
+          const existingLabels = await octokit.issues.listLabelsForRepo({ owner, repo });
+          const labelExists = existingLabels.data.some(label => label.name === labelName);
+
+          if (!labelExists) {
+            // Create a new label
+            await octokit.issues.createLabel({ owner, repo, name: labelName, color: 'd73a4a' }); // Set the desired label color here (d73a4a is the default GitHub red)
+          }
