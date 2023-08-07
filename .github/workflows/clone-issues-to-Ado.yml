@@ -32,7 +32,7 @@ jobs:
                 gitHubProjectNumber: 3,
                 gitHubProjectColumns: ['Ready for work (ordered by priority)', 'In progress'],
                 orgUrl: 'https://dev.azure.com/v-mohithgc',
-                project: 'AzureDevOps',
+                project: 'PM task test',
                 adoPAT: process.env.adoPat,
                 workItemType: 'Bug',
                 areaPath: 'PM task test\\RMTaskTeam', 
