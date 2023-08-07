@@ -23,21 +23,20 @@ jobs:
       - run: npm install azure-devops-node-api@12.0.0
       - uses: actions/github-script@v6
         env:
-          adoPat: ${{ secrets.AZP_TOKEN }}
+          adoPat: ${{ secrets.AZP_PAT }}
         with:
           github-token: ${{ secrets.RM_AUTO_TEST }}
           script: |
             const script = require('./scripts/clone-issues-to-ado.js');
             const options = {
-                gitHubOwner: 'v-mohithgc',
                 gitHubRepo: 'RM-Tasks',
                 gitHubProjectNumber: 5,
                 gitHubProjectColumns: ['Done', 'Blocker'],
                 orgUrl: 'https://dev.azure.com/v-mohithgc',
                 project: 'PM task test',
                 adoPAT: process.env.adoPat,
-                workItemType: 'Bug',
-                areaPath: 'PM task test\\RMTaskTeam', 
+                workItemType: 'User Story',
+                areaPath: 'PM task test\\RMTaskTeam',
                 iteration: 'PM task test\\Sprint 1'
             }
             await script.cloneIssuesToAdo(github, context, options);
