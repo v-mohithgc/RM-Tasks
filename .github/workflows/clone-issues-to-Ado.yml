@@ -29,8 +29,8 @@ jobs:
           script: |
             const script = require('./scripts/clone-issues-to-ado.js');
             const options = {
-                gitHubOwner: v-mohithgc,
-                gitHubRepo: RM-Tasks,
+                gitHubOwner: 'v-mohithgc',
+                gitHubRepo: 'RM-Tasks',
                 gitHubProjectNumber: 5,
                 gitHubProjectColumns: ['Done', 'Blocker'],
                 orgUrl: 'https://dev.azure.com/v-mohithgc',
