@@ -29,8 +29,8 @@ jobs:
           script: |
             const script = require('./scripts/clone-issues-to-ado.js');
             const options = {
-                gitHubProjectNumber: 3,
-                gitHubProjectColumns: ['Ready for work (ordered by priority)', 'In progress'],
+                gitHubProjectNumber: 5,
+                gitHubProjectColumns: ['Done', 'Blocker'],
                 orgUrl: 'https://dev.azure.com/v-mohithgc',
                 project: 'PM task test',
                 adoPAT: process.env.adoPat,
