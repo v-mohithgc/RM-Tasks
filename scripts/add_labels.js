@@ -1,6 +1,7 @@
-const { context, GitHub } = require('@actions/github');
+const core = require('@actions/core');
+const github = require('@actions/github');
 
-const issueTitle = context.payload.issue.title.toLowerCase();
+const issueTitle = github.context.payload.issue.title.toLowerCase();
 
 // Define your keyword-label mappings
 const keywordLabels = {
@@ -9,16 +10,16 @@ const keywordLabels = {
   documentation: "documentation"
 };
 
-const octokit = new GitHub(process.env.GITHUB_TOKEN);
+const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
 
 async function run() {
   for (const keyword in keywordLabels) {
     if (issueTitle.includes(keyword)) {
       const label = keywordLabels[keyword];
       await octokit.rest.issues.addLabels({
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        issue_number: context.issue.number,
+        owner: github.context.repo.owner,
+        repo: github.context.repo.repo,
+        issue_number: github.context.issue.number,
         labels: [label]
       });
     }
@@ -26,6 +27,5 @@ async function run() {
 }
 
 run().catch(error => {
-  console.error(error);
-  process.exit(1);
+  core.setFailed(error.message);
 });
