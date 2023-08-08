@@ -1,6 +1,7 @@
 name: Feature request
 description: Use this template to submit a feature request
 title: "[enhancement]: "
+labels: ["Area:RM", "Bug"]
 body:
   - type: markdown
     attributes:
