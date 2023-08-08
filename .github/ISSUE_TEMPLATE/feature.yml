@@ -24,8 +24,6 @@ body:
       label: Select a label
       options:
         - label: Enhancement
-          value: enhancement
         - label: Bug
-          value: bug
         - label: Documentation
-          value: documentation
+      
