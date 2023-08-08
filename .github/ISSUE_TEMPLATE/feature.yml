@@ -16,12 +16,16 @@ body:
       label: Describe your feature request here
       placeholder: Put your question here.
       description: Please try to provide as much detail as possible
-  - type: select
-    id: label-select
+    validations:
+      required: true
+  - type: dropdown
+    id: label-choice
     attributes:
       label: Select a label
-      description: Choose an appropriate label for your issue
       options:
-        - Bug
-        - Enhancement
-        - Feature Request
+        - label: Enhancement
+          value: enhancement
+        - label: Bug
+          value: bug
+        - label: Documentation
+          value: documentation
