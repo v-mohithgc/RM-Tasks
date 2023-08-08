@@ -1,5 +1,5 @@
 const { Octokit } = require('@octokit/core');
-const { GitHub, context } = require('@actions/github');
+const { context, GitHub } = require('@actions/github');
 
 const issueTitle = context.payload.issue.title.toLowerCase();
 
@@ -12,14 +12,21 @@ const keywordLabels = {
 
 const octokit = new GitHub(process.env.GITHUB_TOKEN);
 
-for (const keyword in keywordLabels) {
-  if (issueTitle.includes(keyword)) {
-    const label = keywordLabels[keyword];
-    octokit.rest.issues.addLabels({
-      owner: context.repo.owner,
-      repo: context.repo.repo,
-      issue_number: context.issue.number,
-      labels: [label]
-    });
+async function run() {
+  for (const keyword in keywordLabels) {
+    if (issueTitle.includes(keyword)) {
+      const label = keywordLabels[keyword];
+      await octokit.rest.issues.addLabels({
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: context.issue.number,
+        labels: [label]
+      });
+    }
   }
 }
+
+run().catch(error => {
+  console.error(error);
+  process.exit(1);
+});
