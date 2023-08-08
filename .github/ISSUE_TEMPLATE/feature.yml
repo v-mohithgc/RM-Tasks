@@ -19,13 +19,4 @@ body:
       description: Please try to provide as much detail as possible
     validations:
       required: true
-  - type: dropdown
-    id: label-choice
-    attributes:
-      label: Select a label
-      options:
-        - label: Area:RM
-          value: Area:RM
-        - label: bug
-          value: bug
-       
+  
