@@ -1,7 +1,7 @@
 name: Feature request
 description: Use this template to submit a feature request
 title: "[enhancement]: "
-labels: ["Area:RM", "bug"]
+labels: ["Area:RM"]
 body:
   - type: markdown
     attributes:
@@ -25,6 +25,10 @@ body:
       label: Select a label
       options:
         - Enhancement
-        - Bug
+        - bug
         - Documentation
-      
+
+on:
+  submit:
+    - labels.add:
+        labels: ["Area:RM", "${{ steps.parameters.label-choice.outputs.value }}"]
