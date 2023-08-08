@@ -22,7 +22,7 @@ jobs:
               documentation: "documentation"
             };
 
-            const octokit = github.getOctokit(token);
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
             
             for (const keyword in keywordLabels) {
               if (issueTitle.includes(keyword)) {
