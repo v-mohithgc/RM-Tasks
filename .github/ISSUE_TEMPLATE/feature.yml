@@ -18,13 +18,16 @@ body:
       description: Please try to provide as much detail as possible
     validations:
       required: true
-  - type: dropdown
-    id: label-choice
+  - type: select
+    id: label-selection
     attributes:
-      label: Select a label
+      label: Select labels
+      description: Choose relevant labels for this issue
+      multiple: true
       options:
-        - label: RM
-          value: Area:RM
-        - label: Bug
-          value: Bug
+        - enhancement
+        - bug
+        - documentation
+        - question
+        - feature
       
