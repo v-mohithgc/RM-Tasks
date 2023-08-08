@@ -1,12 +1,20 @@
 name: Feature request
 description: Use this template to submit a feature request
 title: "[enhancement]: "
-labels: ["Area:RM", "bug"]
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to raise a question
+  - type: select
+    id: label-select
+    attributes:
+      label: Select a label
+      options:
+        - Area:RM
+        - bug
+    validations:
+      required: true
   - type: input
     id: task-name
     attributes:
@@ -16,6 +24,6 @@ body:
     attributes:
       label: Describe your feature request here
       placeholder: Put your question here.
-      description: Please try to provide as much details as possible
+      description: Please try to provide as much detail as possible
     validations:
       required: true
