@@ -1,6 +1,6 @@
 name: Feature request
 description: Use this template to submit a feature request
-title: "[Feature Request]: "
+title: "[enhancement]: "
 body:
   - type: markdown
     attributes:
@@ -18,14 +18,14 @@ body:
       description: Please try to provide as much detail as possible
     validations:
       required: true
-  - type: select
-    id: label-choices
+  - type: dropdown
+    id: label-choice
     attributes:
-      label: Choose labels
+      label: Select a label
       options:
-        - enhancement
-        - bug
-        - documentation
-        - others
-    validations:
-      required: true
+        - label: Enhancement
+          value: enhancement
+        - label: Bug
+          value: bug
+        - label: Documentation
+          value: documentation
