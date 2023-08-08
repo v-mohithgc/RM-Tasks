@@ -1,4 +1,3 @@
-const { Octokit } = require('@octokit/core');
 const { context, GitHub } = require('@actions/github');
 
 const issueTitle = context.payload.issue.title.toLowerCase();
