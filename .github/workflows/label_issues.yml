@@ -10,29 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Issue Title and Add Labels
-        uses: actions/github-script@v4
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          script: |
-            const issueTitle = context.payload.issue.title.toLowerCase();
+          node-version: '14'
 
-            // Define your keyword-label mappings
-            const keywordLabels = {
-              bug: "bug",
-              enhancement: "enhancement",
-              documentation: "documentation"
-            };
+      - name: Install dependencies
+        run: npm install @actions/github
 
-            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-            
-            for (const keyword in keywordLabels) {
-              if (issueTitle.includes(keyword)) {
-                const label = keywordLabels[keyword];
-                await octokit.issues.addLabels({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  issue_number: context.issue.number,
-                  labels: [label]
-                });
-              }
-            }
-          token: ${{ secrets.RM_AUTO_TEST }}
+      - name: Run script
+        run: node .github/scripts/add_labels.js
+        env:
+          GITHUB_TOKEN: ${{ secrets.RM_AUTO_TEST }}
