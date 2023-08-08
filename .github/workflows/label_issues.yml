@@ -17,9 +17,6 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install dependencies
-        run: npm install @actions/github
-
       - name: Run script
         run: node .github/scripts/add_labels.js
         env:
