@@ -23,9 +23,8 @@ body:
     attributes:
       label: Select a label
       options:
-        - label: Enhancement
-          value: enhancement
+        - label: RM
+          value: Area:RM
         - label: Bug
-          value: bug
-        - label: Documentation
-          value: documentation
+          value: Bug
+      
