@@ -1,7 +1,14 @@
 name: Feature request
 description: Use this template to submit a feature request
 title: "[enhancement]: "
-labels: ["Area:RM", "bug"]
+inputs:
+  labels:
+    description: Select appropriate labels for your issue
+    required: true
+    type: array
+    items:
+      type: string
+    default: ["Area:RM", "enhancement"]
 body:
   - type: markdown
     attributes:
@@ -19,4 +26,3 @@ body:
       description: Please try to provide as much detail as possible
     validations:
       required: true
-  
