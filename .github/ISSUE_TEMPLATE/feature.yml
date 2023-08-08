@@ -28,7 +28,3 @@ body:
         - bug
         - Documentation
 
-on:
-  submit:
-    - labels.add:
-        labels: ["Area:RM", "${{ steps.parameters.label-choice.outputs.value }}"]
