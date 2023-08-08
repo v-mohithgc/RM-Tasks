@@ -23,7 +23,7 @@ body:
     attributes:
       label: Select a label
       options:
-        - label: Enhancement
-        - label: Bug
-        - label: Documentation
+        - Enhancement
+        - Bug
+        - Documentation
       
