@@ -21,6 +21,6 @@ jobs:
         run: npm install @actions/github
 
       - name: Run script
-        run: node .github/scripts/add_labels.js
+        run: node scripts/add_labels.js
         env:
           GITHUB_TOKEN: ${{ secrets.RM_AUTO_TEST }}
